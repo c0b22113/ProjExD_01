@@ -14,22 +14,30 @@ def main():
 
     tmr = 0
     x = 0
+    count = 1
 
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: return
 
-        screen.blit(bg_img, [-x, 0])
-        screen.blit(bg_fimg, [1600-x, 0])
+        if x >= 1600:  # xが1600に達したら
+            count = 1 if count == 0 else 0  # countを0と1で切り替え
+            x = 0
 
-        if tmr % 2 == 0:
-            screen.blit(kk3_imgs[tmr % 2], [300, 200])
-        elif tmr % 2 == 1:
-            screen.blit(kk3_imgs[tmr % 2], [300, 200])
+        if count == 0:
+            screen.blit(bg_img, [-x, 0])
+            screen.blit(bg_fimg, [1600 - x, 0])
+        else:
+            screen.blit(bg_fimg, [-x, 0])
+            screen.blit(bg_img, [1600 - x, 0])
+
+        index = (tmr // 75) % 2
+        screen.blit(kk3_imgs[index], [300, 200])
+
         pg.display.update()
         tmr += 1
         x += 1
-        clock.tick(500)
+        clock.tick(100)
 
 if __name__ == "__main__":
     pg.init()
