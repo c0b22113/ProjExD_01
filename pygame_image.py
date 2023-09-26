@@ -14,14 +14,14 @@ def main():
 
     tmr = 0
     x = 0
-    count = 1
+    count = 0
 
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: return
 
-        if x >= 1600:  # xが1600に達したら
-            count = 1 if count == 0 else 0  # countを0と1で切り替え
+        if x >= 1600:
+            count = 1 if count == 0 else 0
             x = 0
 
         if count == 0:
